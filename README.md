@@ -25,4 +25,5 @@ Code-snippets for developing eBPF programs
 ### References
 
 - https://docs.ebpf.io/
+- https://docs.kernel.org/bpf/libbpf/program_types.html
 
