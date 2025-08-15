@@ -1,13 +1,20 @@
 {
   "name": "ebpf-snippets",
   "displayName": "eBPF Snippets",
-  "description": "Short code-snippets for developing eBPF programs",
-  "repository": {"url": "https://github.com/h0x0er/ebpf-snippets.git"},
+  "description": "Code-snippets for developing eBPF programs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/h0x0er/ebpf-snippets"
+  },
+  "author": {
+    "name": "h0x0er",
+    "url": "https://h0x0er.github.io/"
+  },
   "version": "0.0.1",
   "engines": {
-    "vscode": "^1.103.0"
+    "vscode": "^1.0.0"
   },
-  "publisher": "",
+  "publisher": "h0x0er",
   "categories": [
     "Snippets"
   ],
