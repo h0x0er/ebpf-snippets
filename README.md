@@ -1,6 +1,6 @@
 # eBPF Snippets
 
-Short code-snippets for developing eBPF programs
+Code-snippets for developing eBPF programs
 
 ![alt text](./media/usage.gif)
 
@@ -18,6 +18,11 @@ Short code-snippets for developing eBPF programs
 
 ![alt text](./media/install-vscode.png)
 
-
-
 **Enjoy :)**
+
+
+
+### References
+
+- https://docs.ebpf.io/
+

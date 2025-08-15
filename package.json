@@ -1,7 +1,7 @@
 {
   "name": "ebpf-snippets",
   "displayName": "eBPF Snippets",
-  "description": "Short code-snippets for developing eBPF programs",
+  "description": "Code-snippets for developing eBPF programs",
   "repository": {
     "type": "git",
     "url": "https://github.com/h0x0er/ebpf-snippets"
