@@ -1,0 +1,56 @@
+{
+    "bpf-prog-cgroup-skb": {
+        "scope": "c",
+        "description": "Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_CGROUP_SKB/",
+        "prefix": "bpf-prog-cgroup-skb",
+        "body": [
+            "SEC(\"cgroup_skb/${1|egress,ingress|}\")",
+            "int handle_$1(struct __sk_buff *skb){ return SK_PASS; }"
+        ]
+    },
+    "bpf-prog-cgroup-sock": {
+        "scope": "c",
+        "description": "Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_CGROUP_SOCK/",
+        "prefix": "bpf-prog-cgroup-sock",
+        "body": [
+            "SEC(\"cgroup/${1|sock_create,sock_release,post_bind4,post_bind6|}\")",
+            "int handle_$1(struct bpf_sock *ctx){ return 1; }"
+        ]
+    },
+    "bpf-prog-cgroup-dev": {
+        "scope": "c",
+        "prefix": "bpf-prog-cgroup-dev",
+        "description": "Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_CGROUP_DEVICE ",
+        "body": [
+            "SEC(\"cgroup/dev\")",
+            "int handle_dev(struct bpf_cgroup_dev_ctx *ctx){ return 0; }"
+        ]
+    },
+    "bpf-prog-cgroup-sock-addr": {
+        "scope": "c",
+        "description": "Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_CGROUP_SOCK_ADDR/",
+        "prefix": "bpf-prog-cgroup-sock-addr",
+        "body": [
+            "SEC(\"cgroup/${1|connect,connect6,bind4,bind6,sendmsg4,sendmsg6,recvmsg4,recvmsg6,getpeername4,getpeername6,getsockname4,getsockname6|}\")",
+            "int handle_$1(struct bpf_sock_addr *ctx){ return 1; }"
+        ]
+    },
+    "bpf-prog-cgroup-sockopt": {
+        "scope": "c",
+        "description": "Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_CGROUP_SOCKOPT/",
+        "prefix": "bpf-prog-cgroup-sockopt",
+        "body": [
+            "SEC(\"cgroup/${1|getsockopt,setsockopt|}\")",
+            "int handle_$1(struct bpf_sockopt *ctx){ return 1; }"
+        ]
+    },
+    "bpf-prog-cgroup-sysctl": {
+        "scope": "c",
+        "prefix": "bpf-prog-cgroup-sysctl",
+        "description": "Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_CGROUP_SYSCTL/",
+        "body": [
+            "SEC(\"cgroup/sysctl\")",
+            "int handle_sysctl(struct bpf_sysctl *ctx){ return 1; }"
+        ]
+    },
+}

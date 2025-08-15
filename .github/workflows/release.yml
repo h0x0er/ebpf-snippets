@@ -1,0 +1,35 @@
+name: Release VSCode Extension
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  release-extension:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Package VSCode Extension
+        run: |
+          vsce package
+          ls -lh *.vsix
+
+      - name: Upload to GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VSIX_FILE=$(ls *.vsix | head -n 1)
+          echo "Uploading $VSIX_FILE to release ${{ github.event.release.tag_name }}"
+          gh release upload "${{ github.event.release.tag_name }}" "$VSIX_FILE" --clobber

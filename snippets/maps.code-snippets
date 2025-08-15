@@ -1,0 +1,65 @@
+{
+	"add license": {
+		"scope": "c",
+		"prefix": "bpf-license",
+		"body": "char __license[] SEC(\"license\") = \"${1|Dual MIT/GPL,Dual BSD/GPL,GPL|}\";"
+	},
+	"create ringbuff map": {
+		"scope": "c",
+		"prefix": "bpf-map-ringbuff",
+		"body": [
+			"struct {",
+			"\t__uint(type, BPF_MAP_TYPE_RINGBUF);",
+			"\t__uint(max_entries, ${1:1 << 26});",
+			"} ${2:events} SEC(\".maps\");"
+		]
+	},
+	"add map_flags": {
+		"scope": "c",
+		"prefix": "bpf-map-add-flags",
+		"body": "\t__uint(map_flags, ${1|BPF_F_NO_PREALLOC,BPF_F_NUMA_NODE,BPF_F_RDONLY,BPF_F_RDONLY_PROG,BPF_F_WRONLY_PROG|});",
+	},
+	"create generic bpf map": {
+		"scope": "c",
+		"prefix": "bpf-map-generic",
+		"body": [
+			"struct {",
+			"\t__uint(type, ${1|BPF_MAP_TYPE_HASH,BPF_MAP_TYPE_PERCPU_ARRAY,BPF_MAP_TYPE_LPM_TRIE,BPF_MAP_TYPE_ARRAY,BPF_MAP_TYPE_PERCPU_ARRAY,BPF_MAP_TYPE_LRU_HASH,BPF_MAP_TYPE_LRU_PERCPU_HASH,BPF_MAP_TYPE_LPM_TRIE,BPF_MAP_TYPE_BLOOM_FILTER,BPF_MAP_TYPE_ARENA|});",
+			"\t__type(key, ${2:u64});",
+			"\t__type(value, ${3:u8});",
+			"\t__uint(max_entries, ${4:100});",
+			"\t__array(values, struct my_value); // remove if not needed",
+			"\t__uint(map_flags, ${5|BPF_F_NO_PREALLOC,BPF_F_NUMA_NODE,BPF_F_RDONLY,BPF_F_RDONLY_PROG,BPF_F_WRONLY_PROG|}); // remove if not needed",
+			"} ${0:my_map_name} SEC(\".maps\");"
+		]
+	},
+	"create generic map-in-map": {
+		"scope": "c",
+		"prefix": "bpf-map-in-map",
+		"body": [
+			"struct {",
+			"\t__uint(type, ${1|BPF_MAP_TYPE_ARRAY_OF_MAPS,BPF_MAP_TYPE_HASH_OF_MAPS|});",
+			"\t__uint(max_entries, ${4:100});",
+			"\t__type(key, ${2:u64});",
+			"\t__array(values, struct my_value);",
+			"} ${5:my_map_name} SEC(\".maps\");"
+		]
+	},
+	"create bpf prog_array map": {
+		"scope": "c",
+		"prefix": "bpf-map-prog-array",
+		"body": [
+			"struct {",
+			"\t__uint(type, BPF_MAP_TYPE_PROG_ARRAY);",
+			"\t__type(key, __u32);",
+			"\t__uint(max_entries, ${1:100});",
+			"\t__array(values, ${2:int(struct pt_regs *)}); // func signature",
+			"} ${0:tail_programs} SEC(\".maps\") = {",
+			"\t.values = {",
+			"\t\t[0] = (void*)&some_func,",
+			"\t\t[1] = (void*)&some_func2,",
+			"\t},",
+			"};"
+		]
+	},
+}

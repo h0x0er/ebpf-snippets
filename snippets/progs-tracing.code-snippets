@@ -1,0 +1,29 @@
+{
+    "raw tracepoint": {
+        "scope": "c",
+        "prefix": "bpf-prog-raw-tracepoint",
+        "description": "https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_RAW_TRACEPOINT",
+        "body": [
+            "SEC(\"raw_tp/${1:sched_switch}\")",
+            "int BPF_PROG(handle_$1){ return 0; }"
+        ]
+    },
+    "fentry/fexit/fmodify programs": {
+        "scope": "c",
+        "prefix": "bpf-prog-new-tracing",
+        "description": "https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_TRACING/",
+        "body": [
+            "SEC(\"${1|fentry,fexit,fmod_ret,iter|}/${2:func_name}\")",
+            "int BPF_PROG(handle_$2){ return 0; }"
+        ]
+    },
+    "kprobe/uprobe programs": {
+        "scope": "c",
+        "prefix": "bpf-prog-probe",
+        "description": "https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_KPROBE/",
+        "body": [
+            "SEC(\"${1|kprobe,kretprobe,uprobe,uretprobe|}/${2:func_name}\")",
+            "int ${3|BPF_KPROBE,BPF_KSYSCALL,BPF_KRETPROBE|}(handle_$2, args...){ return 0; }"
+        ]
+    }
+}

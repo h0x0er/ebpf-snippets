@@ -1,0 +1,39 @@
+{
+  "name": "ebpf-snippets",
+  "displayName": "eBPF Snippets",
+  "description": "Short code-snippets for developing eBPF programs",
+  "repository": {"url": "https://github.com/h0x0er/ebpf-snippets.git"},
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.103.0"
+  },
+  "publisher": "",
+  "categories": [
+    "Snippets"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "c",
+        "path": "./snippets/maps.code-snippets"
+      },
+      {
+        "language": "c",
+        "path": "./snippets/progs-cgroup.code-snippets"
+      },
+      {
+        "language": "c",
+        "path": "./snippets/progs-tracing.code-snippets"
+      }
+    ]
+  },
+  "scripts": {
+    "deploy": "vsce publish --yarn"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^3.6.0",
+    "add": "^2.0.6",
+    "or": "^0.2.0",
+    "yarn": "^1.22.22"
+  }
+}
