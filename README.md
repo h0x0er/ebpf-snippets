@@ -34,7 +34,13 @@ OR
 
 
 
-### References
+## References
 
 - https://docs.ebpf.io/
 - https://docs.kernel.org/bpf/libbpf/program_types.html
+
+
+## Contribution
+
+Improvements to **eBPF-snippets** are always welcome !  
+If you’d like to contribute, feel free to open an issue or submit a pull request.  
