@@ -53,4 +53,13 @@
             "int handle_sysctl(struct bpf_sysctl *ctx){ return 1; }"
         ]
     },
+    "create cgroup sock-ops prog": {
+        "scope": "c",
+        "description": "",
+        "prefix": "bpf-prog-cgroup-sock-ops",
+        "body": [
+            "SEC(\"sockops\")",
+            "int handle_sockops(struct bpf_sock_ops *ctx){ return 1; }"
+        ]
+    },
 }

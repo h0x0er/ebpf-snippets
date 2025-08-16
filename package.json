@@ -14,7 +14,7 @@
   "engines": {
     "vscode": "^1.0.0"
   },
-  "publisher": "h0x0er",
+  "publisher": "jatin-experiment-01",
   "categories": [
     "Snippets"
   ],
@@ -31,6 +31,10 @@
       {
         "language": "c",
         "path": "./snippets/progs-tracing.code-snippets"
+      },
+      {
+        "language": "c",
+        "path": "./snippets/progs-network.code-snippets"
       }
     ]
   },

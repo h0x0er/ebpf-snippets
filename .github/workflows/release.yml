@@ -37,3 +37,9 @@ jobs:
           VSIX_FILE=$(ls *.vsix | head -n 1)
           echo "Uploading $VSIX_FILE to release ${{ github.event.release.tag_name }}"
           gh release upload "${{ github.event.release.tag_name }}" "$VSIX_FILE" --clobber
+
+      - name: Publish to VSCode Marketplace
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+        run: |
+          vsce publish -p "$VSCE_PAT"
