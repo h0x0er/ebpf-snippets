@@ -39,6 +39,7 @@ jobs:
           gh release upload "${{ github.event.release.tag_name }}" "$VSIX_FILE" --clobber
 
       - name: Publish to VSCode Marketplace
+        if: false
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
         run: |
