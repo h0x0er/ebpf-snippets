@@ -7,6 +7,18 @@ Code-snippets for developing eBPF programs
 
 # Install
 
+## Within vscode
+
+- Search for `@category:"snippets" ebpf-snippets` in extensions and click `install`
+
+OR
+
+- Install using `ext install`
+
+![alt text](./media/install-ext.png)
+
+
+## From github-release
 
 1. GOTO latest [release](https://github.com/h0x0er/ebpf-snippets/releases) and download the `vsix` file.
 
