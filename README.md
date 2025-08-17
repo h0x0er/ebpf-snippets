@@ -25,7 +25,7 @@ OR
 ![alt text](./media/release.png)
 
 2. In vscode, hit `ctrl+shift+p`,
-   1. type `install from vsixt-enter, then
+   1. type `install from vsix` hit-enter, then
    2. choose the downloaded `vsix file`
 
 ![alt text](./media/install-vscode.png)
