@@ -1,0 +1,18 @@
+{
+    "create kernel config": {
+        "scope": "c",
+        "prefix": "bpf-misc-kconfig",
+        "body": [
+            "${2| ,// Refer: https://docs.ebpf.io/ebpf-library/libbpf/ebpf/__kconfig/|}",
+            "extern unsigned ${1:CONFIG_HZ} __kconfig __weak;"
+        ]
+    },
+    "create linux version variable": {
+        "scope": "c",
+        "prefix": "bpf-misc-kernel-version",
+        "body": [
+            "${1| ,// Refer: https://docs.ebpf.io/ebpf-library/libbpf/ebpf/KERNEL_VERSION/|}",
+            "extern int LINUX_KERNEL_VERSION __kconfig;"
+        ]
+    },
+}

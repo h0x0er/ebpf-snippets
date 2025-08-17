@@ -35,6 +35,10 @@
       {
         "language": "c",
         "path": "./snippets/progs-network.code-snippets"
+      },
+      {
+        "language": "c",
+        "path": "./snippets/misc.code-snippets"
       }
     ]
   },
