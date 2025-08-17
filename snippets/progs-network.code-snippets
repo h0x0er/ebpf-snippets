@@ -1,72 +1,72 @@
 {
     "create classifier prog (tc/tcx)": {
         "scope": "c",
-        "description": "Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_SCHED_CLS/",
         "prefix": "bpf-prog-tc",
         "body": [
+            "${1| ,// Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_SCHED_CLS|}",
             "SEC(\"${1|tc/egress,tc/ingress,tcx/egress,tcx/ingress|}\")",
             "int handle_${1/[\\/]/_/}(struct __sk_buff *skb){ return -1; }"
         ]
     },
     "create xdp prog": {
         "scope": "c",
-        "description": "Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_XDP/#usage",
         "prefix": "bpf-prog-xdp",
         "body": [
+            "${1| ,// Refer:  https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_XDP|}",
             "SEC(\"xdp\")",
             "int handle_xdp(struct xdp_md *ctx){ return XDP_PASS; }"
         ]
     },
     "create sk_skb prog": {
         "scope": "c",
-        "description": "Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_SK_SKB/",
         "prefix": "bpf-prog-sk-skb",
         "body": [
+            "${1| ,// Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_SK_SKB/|}",
             "SEC(\"sk_skb/${1|stream_parser,stream_verdict|}\")",
             "int handle_$1(struct __sk_buff *skb){ return 1; }"
         ]
     },
     "create sk_msg prog": {
         "scope": "c",
-        "description": "Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_SK_MSG/",
         "prefix": "bpf-prog-sk-msg",
         "body": [
+            "${1| ,// Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_SK_MSG/|}",
             "SEC(\"sk_msg\")",
             "int handle_skmsg(struct sk_msg_md *msg){ return SK_PASS; }"
         ]
     },
     "create sk_lookup prog": {
         "scope": "c",
-        "description": "Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_SK_LOOKUP/",
         "prefix": "bpf-prog-sk-lookup",
         "body": [
+            "${1| ,// Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_SK_LOOKUP/|}",
             "SEC(\"sk_lookup\")",
             "int handle_sklookup(struct bpf_sk_lookup *ctx){ return SK_PASS; }"
         ]
     },
     "create sk_reuseport prog": {
         "scope": "c",
-        "description": "Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_SK_REUSEPORT/#usage",
         "prefix": "bpf-prog-sk-reuseport",
         "body": [
+            "${2| ,// Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_SK_REUSEPORT|}",
             "SEC(\"${1|sk_reuseport,sk_reuseport/migrate|}\")",
             "int handle_sk_reuseport(struct sk_reuseport_md *ctx){ return SK_PASS; }"
         ]
     },
     "create flow_dissector prog": {
         "scope": "c",
-        "description": "Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_FLOW_DISSECTOR/#context",
         "prefix": "bpf-prog-flow-dissector",
         "body": [
+            "${1| ,// Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_FLOW_DISSECTOR/|}",
             "SEC(\"flow_dissector\")",
             "int handle_dissector(struct __sk_buff *skb){ return BPF_OK; }"
         ]
     },
     "create netfliter prog": {
         "scope": "c",
-        "description": "Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_NETFILTER/",
         "prefix": "bpf-prog-netfilter",
         "body": [
+            "${1| ,// Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_NETFILTER/|}",
             "SEC(\"netfilter\")",
             "int do_netfilter(struct bpf_nf_ctx *ctx){ return NF_ACCEPT; }"
         ]

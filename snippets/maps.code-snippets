@@ -8,10 +8,23 @@
 		"scope": "c",
 		"prefix": "bpf-map-ringbuff",
 		"body": [
+			"${3| ,// Refer: https://docs.ebpf.io/linux/map-type/BPF_MAP_TYPE_RINGBUF/|}",
 			"struct {",
 			"\t__uint(type, BPF_MAP_TYPE_RINGBUF);",
 			"\t__uint(max_entries, ${1:1 << 26});",
 			"} ${2:events} SEC(\".maps\");"
+		]
+	},
+	"create perf-event-array map": {
+		"scope": "c",
+		"prefix": "bpf-map-perf-array",
+		"body": [
+			"${4| ,// Refer: https://docs.ebpf.io/linux/map-type/BPF_MAP_TYPE_PERF_EVENT_ARRAY/|}",
+			"struct {",
+			"\t__uint(type, BPF_MAP_TYPE_PERF_EVENT_ARRAY);",
+			"\t__type(key, ${1:int});",
+			"\t__type(value, ${2:struct event});",
+			"} ${3:map_name} SEC(\".maps\");"
 		]
 	},
 	"add map_flags": {
@@ -23,40 +36,44 @@
 		"scope": "c",
 		"prefix": "bpf-map-generic",
 		"body": [
+			"${9| ,// Refer: https://docs.ebpf.io/linux/map-type/|}",
 			"struct {",
 			"\t__uint(type, ${1|BPF_MAP_TYPE_HASH,BPF_MAP_TYPE_PERCPU_HASH,BPF_MAP_TYPE_LPM_TRIE,BPF_MAP_TYPE_ARRAY,BPF_MAP_TYPE_PERCPU_ARRAY,BPF_MAP_TYPE_LRU_HASH,BPF_MAP_TYPE_LRU_PERCPU_HASH,BPF_MAP_TYPE_LPM_TRIE,BPF_MAP_TYPE_BLOOM_FILTER,BPF_MAP_TYPE_ARENA,BPF_MAP_TYPE_QUEUE,BPF_MAP_TYPE_STACK,BPF_MAP_TYPE_PERF_EVENT_ARRAY|});",
 			"\t__type(key, ${2:u64});",
-			"\t__uint(key_size, ${3:sizeof(u64)}); // remove if not needed",
 			"\t__type(value, ${4:u8});",
-			"\t__uint(value_size, ${5:sizeof(u64)}); // remove if not needed",
 			"\t__uint(max_entries, ${6:100});",
+			"\t__uint(pinning, LIBBPF_PIN_BY_NAME) // remove if not needed",
+			"\t__uint(key_size, ${3:sizeof(u64)}); // remove if not needed",
+			"\t__uint(value_size, ${5:sizeof(u64)}); // remove if not needed",
 			"\t__array(values, struct my_value); // remove if not needed",
 			"\t__uint(map_flags, ${7|BPF_F_NO_PREALLOC,BPF_F_NUMA_NODE,BPF_F_RDONLY,BPF_F_RDONLY_PROG,BPF_F_WRONLY_PROG|}); // remove if not needed",
-			"} ${0:my_map_name} SEC(\".maps\");"
+			"} ${8:my_map_name} SEC(\".maps\");"
 		]
 	},
 	"create generic map-in-map": {
 		"scope": "c",
 		"prefix": "bpf-map-in-map",
 		"body": [
+			"${6| ,// Refer: https://docs.ebpf.io/linux/map-type/BPF_MAP_TYPE_ARRAY_OF_MAPS/|}",
 			"struct {",
 			"\t__uint(type, ${1|BPF_MAP_TYPE_ARRAY_OF_MAPS,BPF_MAP_TYPE_HASH_OF_MAPS|});",
 			"\t__uint(max_entries, ${2:100});",
 			"\t__type(key, ${3:u64});",
 			"\t__array(values, ${4:struct my_value});",
-			"} ${0:my_map_name} SEC(\".maps\");"
+			"} ${5:my_map_name} SEC(\".maps\");"
 		]
 	},
 	"create bpf prog_array map": {
 		"scope": "c",
 		"prefix": "bpf-map-prog-array",
 		"body": [
+			"${4| ,// Refer: https://github.com/cilium/tetragon/blob/c51dd078bfb568075ba1fb287f2447f29f709073/bpf/process/bpf_generic_rawtp.c#L17-L45|}",
 			"struct {",
 			"\t__uint(type, BPF_MAP_TYPE_PROG_ARRAY);",
 			"\t__type(key, __u32);",
 			"\t__uint(max_entries, ${1:100});",
 			"\t__array(values, ${2:int(struct pt_regs *)}); // func signature",
-			"} ${0:tail_programs} SEC(\".maps\") = {",
+			"} ${3:tail_programs} SEC(\".maps\") = {",
 			"\t.values = {",
 			"\t\t[0] = (void*)&some_func,",
 			"\t\t[1] = (void*)&some_func2,",
