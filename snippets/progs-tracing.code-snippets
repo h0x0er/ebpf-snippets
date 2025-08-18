@@ -25,5 +25,23 @@
             "SEC(\"${1|kprobe,kretprobe,uprobe,uretprobe|}/${2:func_name}\")",
             "int ${3|BPF_KPROBE,BPF_UPROBE,BPF_KSYSCALL,BPF_KRETPROBE,BPF_URETPROBE,BPF_KPROBE_SYSCALL|}(handle_$2, args...){ return 0; }$0",
         ]
+    },
+    "create perf-event program": {
+        "scope": "c",
+        "prefix": "bpf-prog-perf-event",
+        "body": [
+            "${1| ,// Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_PERF_EVENT/|}",
+            "SEC(\"perf_event\")",
+            "int handle_perfevent(struct bpf_perf_event_data *ctx){ return 0; }$0",
+        ]
+    },
+    "create lsm program": {
+        "scope": "c",
+        "prefix": "bpf-prog-lsm",
+        "body": [
+            "${3| ,// Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_LSM/|}",
+            "SEC(\"lsm/${1:security_file_permission}\")",
+            "int BPF_PROG($1, ${2:args...}){ return 0; }$0",
+        ]
     }
 }
