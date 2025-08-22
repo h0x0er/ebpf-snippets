@@ -30,7 +30,7 @@
 	"add map_flags": {
 		"scope": "c",
 		"prefix": "bpf-map-add-flags",
-		"body": "\t__uint(map_flags, ${1|BPF_F_NO_PREALLOC,BPF_F_NUMA_NODE,BPF_F_RDONLY,BPF_F_RDONLY_PROG,BPF_F_WRONLY_PROG|});",
+		"body": "\t__uint(map_flags, ${1|BPF_F_NO_PREALLOC,BPF_F_NUMA_NODE,BPF_F_RDONLY,BPF_F_RDONLY_PROG,BPF_F_WRONLY_PROG,BPF_F_ZERO_SEED|});",
 	},
 	"create generic bpf map": {
 		"scope": "c",
@@ -46,7 +46,7 @@
 			"\t__uint(key_size, ${5:sizeof(u64)}); // remove if not needed",
 			"\t__uint(value_size, ${6:sizeof(u64)}); // remove if not needed",
 			"\t__array(values, ${7:struct my_value}); // remove if not needed",
-			"\t__uint(map_flags, ${8|BPF_F_NO_PREALLOC,BPF_F_NUMA_NODE,BPF_F_RDONLY,BPF_F_RDONLY_PROG,BPF_F_WRONLY_PROG|}); // remove if not needed",
+			"\t__uint(map_flags, ${8|BPF_F_NO_PREALLOC,BPF_F_NUMA_NODE,BPF_F_RDONLY,BPF_F_RDONLY_PROG,BPF_F_WRONLY_PROG,BPF_F_ZERO_SEED|}); // remove if not needed",
 			"} ${9:my_map_name} SEC(\".maps\");"
 		]
 	},
