@@ -3,7 +3,7 @@
         "scope": "c",
         "prefix": "bpf-prog-tc",
         "body": [
-            "${1| ,// Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_SCHED_CLS|}",
+            "${2| ,// Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_SCHED_CLS|}",
             "SEC(\"${1|tc/egress,tc/ingress,tcx/egress,tcx/ingress|}\")",
             "int handle_${1/[\\/]/_/}(struct __sk_buff *skb){ return -1; }"
         ]
@@ -21,7 +21,7 @@
         "scope": "c",
         "prefix": "bpf-prog-sk-skb",
         "body": [
-            "${1| ,// Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_SK_SKB/|}",
+            "${2| ,// Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_SK_SKB/|}",
             "SEC(\"sk_skb/${1|stream_parser,stream_verdict|}\")",
             "int handle_$1(struct __sk_buff *skb){ return 1; }"
         ]
@@ -33,7 +33,7 @@
             "${1| ,// Refer: https://docs.ebpf.io/linux/program-type/BPF_PROG_TYPE_SK_MSG/|}",
             "SEC(\"sk_msg\")",
             "int handle_skmsg(struct sk_msg_md *msg){ return SK_PASS; }"
-        ]
+        ]   
     },
     "create sk_lookup prog": {
         "scope": "c",
