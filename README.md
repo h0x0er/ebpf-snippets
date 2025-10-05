@@ -38,7 +38,8 @@ OR
 
 - https://docs.ebpf.io/
 - https://docs.kernel.org/bpf/libbpf/program_types.html
-
+- for `prog_type` and `prog_context`: https://elixir.bootlin.com/linux/v6.13.6/source/include/linux/bpf_types.h
+- for `prog_section`: https://elixir.bootlin.com/linux/v6.13.6/source/tools/lib/bpf/libbpf.c#L9403
 
 ## Contribution
 
